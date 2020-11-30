@@ -17,3 +17,11 @@ export function PEDIDOS_HOJE_GET() {
     },
   };
 }
+export function PEDIDOS_HOJE_GRAPH_GET() {
+  return {
+    url: API_URL + '/pedidoPorHora/todayGraph',
+    option: {
+      method: 'GET',
+    },
+  };
+}

@@ -3,61 +3,30 @@ import styles from './PedidoPorHoraGraphs.module.css';
 import Chart from 'react-google-charts';
 
 export const PedidoPorHoraGraphs = ({ data }) => {
-  //  const [graphPie, setGraphPie] = React.useState([]);
   const [graphGroup, setGraphGroup] = React.useState([]);
-  const [graphGroupP, setGraphGroupP] = React.useState([]);
   const [quantidadePedidoTotal, setQuantidadePedidoTotal] = React.useState(0);
 
   React.useEffect(() => {
-    const temPedido = (modelo) => {
-      var pedidos;
-      const dados = data.filter((item) => item.tipo === modelo);
-      if (dados.length > 0) {
-        pedidos = {
-          titulo: modelo === 'F.V.' ? 'Pré venda' : 'Pronta entrega',
-          quantidadePedido: dados
-            .map(({ quantidadePedido }) => Number(quantidadePedido))
-            .reduce((a, b) => a + b),
-        };
-      } else {
-        pedidos = null;
-      }
-      return pedidos;
-    };
-    const pedidoForcaVendas = temPedido('F.V.');
-    const pedidoProntaEntrega = temPedido('P.E.');
+    console.log(data);
 
-    const pedidos = [
-      pedidoForcaVendas != null && pedidoForcaVendas,
-      pedidoProntaEntrega != null && pedidoProntaEntrega,
-    ];
-
-    console.log(pedidos);
-
-    /*  const graphData = pedidos
-      .filter((item) => item !== false)
-      .map((item) => {
-        return {
-          x: item.quantidadePedido,
-          y: item.quantidadePedido,
-        };
-      });*/
-    const graphDataGroup = data.filter((item) => item.tipo === 'F.V.');
-    const graphDataGroupP = data.filter((item) => item.tipo === 'P.E.');
+    const graphDataGroup = data.map((item) => {
+      return {
+        horaInclusao: item.hora,
+        preVenda: item.preVenda,
+        prontaEntrega: item.prontaEntrega,
+      };
+    });
 
     setQuantidadePedidoTotal(
       data
-        .map(({ quantidadePedido }) => Number(quantidadePedido))
+        .map(({ preVenda, prontaEntrega }) => Number(preVenda, prontaEntrega))
         .reduce((a, b) => a + b),
     );
 
-    //  setGraphPie(graphData);
     setGraphGroup(graphDataGroup);
-    setGraphGroupP(graphDataGroupP);
-
     console.log(graphDataGroup);
-    console.log(graphDataGroupP);
   }, [data]);
+
   return (
     <div>
       <div
@@ -70,9 +39,12 @@ export const PedidoPorHoraGraphs = ({ data }) => {
           <Chart
             width={'500px'}
             height={'300px'}
-            chartType="Bar"
+            chartType="ColumnChart"
             loader={<div>Loading Chart</div>}
-            data={[['Quantidade Pedido', 'Hora Inclusao'], graphGroup]}
+            data={[
+              ['Hora Inclusão', 'Pre Venda', 'Pronta Entrega'],
+              graphGroup,
+            ]}
             options={{
               title: 'Pedidos por Hora',
               vAxis: { title: 'Horas' },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { PEDIDOS_GET } from '../../api';
 import { PEDIDOS_HOJE_GET } from '../../api';
+import { PEDIDOS_HOJE_GRAPH_GET } from '../../api';
 import useFetch from '../../Hooks/useFetch';
 const PedidoPorHoraGraphs = React.lazy(() => import('./PedidoPorHoraGraphs'));
 
@@ -9,7 +10,7 @@ const PedidoPorHora = () => {
 
   React.useEffect(() => {
     async function getData() {
-      const { url, options } = PEDIDOS_HOJE_GET();
+      const { url, options } = PEDIDOS_HOJE_GRAPH_GET();
       await request(url, options);
     }
     getData();
