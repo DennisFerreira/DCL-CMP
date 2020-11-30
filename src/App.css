@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 5.5rem;
+  margin: 0px;
+  --type-first: Helvetica, Arial, sans-serif;
+  --type-second: 'Spectral', Georgia;
+  font-family: var(--type-first);
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0px;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+button,
+input {
+  display: block;
+  font-size: 1rem;
+  font-family: var(--type-first);
+}
+
+.container {
+  max-width: 60rem;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+.VictoryContainer {
+  height: initial !important;
+}
+
+svg {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.legend-parent-parent {
+  width: 50;
+}
+
+.VictoryContainer {
+  height: 120 !important;
+}
