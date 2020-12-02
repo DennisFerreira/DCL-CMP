@@ -25,7 +25,7 @@ export const PedidoPorHoraGraphs = ({ data }) => {
       };
     });
 
-    setTimeStamp(moment().format('DD/MM/YYYY hh:mm:ss'));
+    setTimeStamp(moment().format('DD/MM/YYYY HH:mm:ss'));
 
     setQuantidadePedidoTotal(
       data.map(({ preVenda }) => Number(preVenda)).reduce((a, b) => a + b) +
