@@ -4,7 +4,7 @@ import styles from './Footer.module.css';
 const Footer = () => {
   return (
     <div className={styles.footer}>
-      <h3>Desenvolvido por: Pedro Henrique Martins da Silva</h3>
+      <h3>Desenvolvido por: Equipe CMP</h3>
     </div>
   );
 };
