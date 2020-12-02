@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:8080';
+export const API_URL = 'http://10.0.3.8:8080';
 
 export function PEDIDOS_GET() {
   return {

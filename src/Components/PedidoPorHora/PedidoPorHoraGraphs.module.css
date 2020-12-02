@@ -38,6 +38,12 @@
     grid-column: 1;
   }
 }
-.VictoryContainer {
-  height: 120 !important;
+
+h2 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.sincronizacao {
+  font-size: 18px;
 }

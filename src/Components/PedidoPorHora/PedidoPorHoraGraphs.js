@@ -1,30 +1,40 @@
 import React from 'react';
 import styles from './PedidoPorHoraGraphs.module.css';
-import Chart from 'react-google-charts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+import moment from 'moment';
 
 export const PedidoPorHoraGraphs = ({ data }) => {
   const [graphGroup, setGraphGroup] = React.useState([]);
   const [quantidadePedidoTotal, setQuantidadePedidoTotal] = React.useState(0);
+  const [timeStamp, setTimeStamp] = React.useState(0);
 
   React.useEffect(() => {
-    console.log(data);
-
     const graphDataGroup = data.map((item) => {
       return {
-        horaInclusao: item.hora,
+        hora: item.hora,
         preVenda: item.preVenda,
         prontaEntrega: item.prontaEntrega,
       };
     });
 
+    setTimeStamp(moment().format('DD/MM/YYYY hh:mm:ss'));
+
     setQuantidadePedidoTotal(
-      data
-        .map(({ preVenda, prontaEntrega }) => Number(preVenda, prontaEntrega))
-        .reduce((a, b) => a + b),
+      data.map(({ preVenda }) => Number(preVenda)).reduce((a, b) => a + b) +
+        data
+          .map(({ prontaEntrega }) => Number(prontaEntrega))
+          .reduce((a, b) => a + b),
     );
 
     setGraphGroup(graphDataGroup);
-    console.log(graphDataGroup);
   }, [data]);
 
   return (
@@ -33,27 +43,36 @@ export const PedidoPorHoraGraphs = ({ data }) => {
         className={`${styles.total} ${styles.graphItem} ${styles.graph} animeLeft`}
       >
         <p>Total de Pedidos: {quantidadePedidoTotal}</p>
+        <br />
+        <p className={styles.sincronizacao}>
+          Hora de última sincronização: {timeStamp}
+        </p>
       </div>
       <div className={styles.graphGroup}>
         <div className={styles.graphItem}>
-          <Chart
-            width={'500px'}
-            height={'300px'}
-            chartType="ColumnChart"
-            loader={<div>Loading Chart</div>}
-            data={[
-              ['Hora Inclusão', 'Pre Venda', 'Pronta Entrega'],
-              graphGroup,
-            ]}
-            options={{
-              title: 'Pedidos por Hora',
-              vAxis: { title: 'Horas' },
-              hAxis: { title: 'Quantidade de pedidos' },
-              seriesType: 'bars',
-              series: { 5: { type: 'line' } },
-            }}
-            //rootProps={{ 'data-testid': '1' }}
-          />
+          <h2>Pedidos por hora</h2>
+          <ResponsiveContainer width="100%" height={500}>
+            <BarChart
+              data={graphGroup}
+              margin={{
+                top: 50,
+                right: 50,
+                left: 50,
+                bottom: 50,
+              }}
+            >
+              <XAxis dataKey="hora" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="preVenda" name=" Pré venda" fill="#1226ab" />
+              <Bar
+                dataKey="prontaEntrega"
+                name=" Pronta entrega"
+                fill="#009c53"
+              />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
 

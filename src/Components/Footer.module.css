@@ -1,0 +1,11 @@
+h3 {
+  color: white;
+  text-align: center;
+}
+
+.footer {
+  background-color: darkblue;
+  margin-top: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
