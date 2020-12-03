@@ -62,3 +62,13 @@ svg {
 .VictoryContainer {
   height: 120 !important;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 5rem);
+}
+
+.AppBody {
+  flex: 1;
+}

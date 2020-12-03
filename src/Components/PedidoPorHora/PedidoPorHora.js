@@ -2,6 +2,7 @@ import React from 'react';
 import { PEDIDOS_GET } from '../../api';
 import { PEDIDOS_HOJE_GET } from '../../api';
 import { PEDIDOS_HOJE_GRAPH_GET } from '../../api';
+import Loading from '../Helper/Loading';
 import useFetch from '../../Hooks/useFetch';
 const PedidoPorHoraGraphs = React.lazy(() => import('./PedidoPorHoraGraphs'));
 
@@ -15,7 +16,7 @@ const PedidoPorHora = () => {
     }
     getData();
   }, [request]);
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>Ocorreu um erro...</div>;
   if (data)
     return (

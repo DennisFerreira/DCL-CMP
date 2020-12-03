@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './PedidoPorHoraGraphs.module.css';
+import { ReactComponent as Refresh } from '../Assets/refresh.svg';
 import {
   BarChart,
   Bar,
@@ -10,6 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import moment from 'moment';
+import { NavLink } from 'react-router-dom';
 
 export const PedidoPorHoraGraphs = ({ data }) => {
   const [graphGroup, setGraphGroup] = React.useState([]);
@@ -47,6 +49,11 @@ export const PedidoPorHoraGraphs = ({ data }) => {
         <p className={styles.sincronizacao}>
           Hora de última sincronização: {timeStamp}
         </p>
+        <nav className={styles.nav}>
+          <NavLink to="/pedidoPorHora">
+            <Refresh height={15} width={15} fill="#1226ab" />
+          </NavLink>
+        </nav>
       </div>
       <div className={styles.graphGroup}>
         <div className={styles.graphItem}>
